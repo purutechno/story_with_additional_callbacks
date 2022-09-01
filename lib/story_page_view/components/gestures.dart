@@ -7,9 +7,11 @@ class Gestures extends StatelessWidget {
   const Gestures({
     Key? key,
     required this.animationController,
+    required this.onLongPress,
   }) : super(key: key);
 
   final AnimationController? animationController;
+  final VoidCallback onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class Gestures extends StatelessWidget {
               },
               onLongPress: () {
                 animationController!.stop();
+                onLongPress();
               },
               onLongPressUp: () {
                 animationController!.forward();

@@ -28,6 +28,7 @@ class StoryPageView extends StatefulWidget {
     required this.itemBuilder,
     required this.storyLength,
     required this.pageLength,
+    required this.onLongPress,
     this.gestureItemBuilder,
     this.initialStoryIndex,
     this.initialPage = 0,
@@ -76,6 +77,8 @@ class StoryPageView extends StatefulWidget {
 
   /// Color under the Stories which is visible when the cube transition is in progress
   final Color backgroundColor;
+
+  final VoidCallback onLongPress;
 
   /// A stream with [IndicatorAnimationCommand] to force pause or continue inticator animation
   /// Useful when you need to show any popup over the story
@@ -147,6 +150,7 @@ class _StoryPageViewState extends State<StoryPageView> {
                   indicatorPadding: widget.indicatorPadding,
                   indicatorAnimationController:
                       widget.indicatorAnimationController,
+                  onLongPress: widget.onLongPress,
                 ),
                 if (isPaging && !isLeaving)
                   Positioned.fill(
@@ -179,7 +183,9 @@ class _StoryPageFrame extends StatefulWidget {
     required this.indicatorDuration,
     required this.indicatorPadding,
     required this.indicatorAnimationController,
+    required this.onLongPress,
   }) : super(key: key);
+
   final int storyLength;
   final int initialStoryIndex;
   final int pageIndex;
@@ -190,6 +196,7 @@ class _StoryPageFrame extends StatefulWidget {
   final Duration indicatorDuration;
   final EdgeInsetsGeometry indicatorPadding;
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
+  final VoidCallback onLongPress;
 
   static Widget wrapped({
     required int pageIndex,
@@ -206,6 +213,7 @@ class _StoryPageFrame extends StatefulWidget {
     required EdgeInsetsGeometry indicatorPadding,
     required ValueNotifier<IndicatorAnimationCommand>?
         indicatorAnimationController,
+    required VoidCallback onLongPress,
   }) {
     return MultiProvider(
       providers: [
@@ -244,6 +252,7 @@ class _StoryPageFrame extends StatefulWidget {
         indicatorDuration: indicatorDuration,
         indicatorPadding: indicatorPadding,
         indicatorAnimationController: indicatorAnimationController,
+        onLongPress: onLongPress,
       ),
     );
   }
@@ -337,6 +346,7 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
         ),
         Gestures(
           animationController: animationController,
+          onLongPress: widget.onLongPress,
         ),
         Positioned.fill(
           child: widget.gestureItemBuilder?.call(

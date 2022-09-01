@@ -112,6 +112,9 @@ class _StoryPageState extends State<StoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StoryPageView(
+        onLongPress: () {
+          //todo: Perform Custom Actions Here
+        },
         itemBuilder: (context, pageIndex, storyIndex) {
           final user = sampleUsers[pageIndex];
           final story = user.stories[storyIndex];
