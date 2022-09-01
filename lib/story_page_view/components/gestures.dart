@@ -11,7 +11,7 @@ class Gestures extends StatelessWidget {
   }) : super(key: key);
 
   final AnimationController? animationController;
-  final VoidCallback onLongPress;
+  final ValueChanged<AnimationController> onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,7 @@ class Gestures extends StatelessWidget {
                 animationController!.forward(from: 0);
                 context.read<StoryStackController>().decrement();
               },
-              onLongPress: () {
-                animationController!.stop();
-                onLongPress();
-              },
+              onLongPress: () => onLongPress(animationController!),
               onLongPressUp: () {
                 animationController!.forward();
               },

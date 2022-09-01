@@ -78,7 +78,7 @@ class StoryPageView extends StatefulWidget {
   /// Color under the Stories which is visible when the cube transition is in progress
   final Color backgroundColor;
 
-  final VoidCallback onLongPress;
+  final ValueChanged<AnimationController> onLongPress;
 
   /// A stream with [IndicatorAnimationCommand] to force pause or continue inticator animation
   /// Useful when you need to show any popup over the story
@@ -196,7 +196,7 @@ class _StoryPageFrame extends StatefulWidget {
   final Duration indicatorDuration;
   final EdgeInsetsGeometry indicatorPadding;
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
-  final VoidCallback onLongPress;
+  final ValueChanged<AnimationController> onLongPress;
 
   static Widget wrapped({
     required int pageIndex,
@@ -213,7 +213,7 @@ class _StoryPageFrame extends StatefulWidget {
     required EdgeInsetsGeometry indicatorPadding,
     required ValueNotifier<IndicatorAnimationCommand>?
         indicatorAnimationController,
-    required VoidCallback onLongPress,
+    required ValueChanged<AnimationController> onLongPress,
   }) {
     return MultiProvider(
       providers: [
